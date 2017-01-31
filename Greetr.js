@@ -5,13 +5,10 @@
 
   Greetr.prototype = {};
 
-  // TODO set default parameters per ES6
-  Greetr.init = function(firstName, lastName, language) {
-    // TODO see if _this is necessary
-    var _this = this;
-    this.firstName = firstName || 'Eric';
-    this.lastName = lastName || 'Cartman';
-    this.language = language || 'en';
+  Greetr.init = function(firstName = 'Eric', lastName = 'Cartman', language = 'en') {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.language = language;
   }
 
   Greetr.init.prototype = Greetr.prototype;
