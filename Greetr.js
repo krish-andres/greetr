@@ -32,8 +32,6 @@
         this.language = "en";
         throw "Chosen language not supported";
       }
-
-      return this;
     },
 
     greeting() {
@@ -65,6 +63,7 @@
     setLang(newLang) {
       this.language = newLang;
       this.validate();
+      return this;
     },
 
     setGreeting(formal = false) {
