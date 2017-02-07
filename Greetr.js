@@ -1,9 +1,74 @@
 (function(global, $) {
-  var Greetr = function(firstName, lastName, language) {
+  var Greetr = (firstName, lastName, language) => {
     return new Greetr.init(firstName, lastName, language);
   };
 
-  Greetr.prototype = {};
+  var supportedLangs = ['en', 'es'];
+
+  var greetings = {
+    en: 'Hello',
+    es: 'Hola'
+  };
+
+  var formalGreetings = {
+    en: 'Greetings',
+    es: 'Saludos'
+  };
+
+  var logMessages = {
+    en: 'Logged in',
+    es: 'Inicio sesion'
+  };
+
+  Greetr.prototype = {
+    fullName() {
+      return `${this.firstName} ${this.lastName}`;
+    },
+
+    validate() {
+      if (supportedLangs.indexOf(this.language) === -1) {
+        this.language = 'en';
+        throw "Chosen language not supported";
+      }
+
+      return this;
+    },
+
+    greeting() {
+      return `${greetings[this.language]} ${this.firstName}!`;
+    },
+
+    formalGreeting() {
+      return `${formalGreetings[this.language]} ${this.fullName()}!`;
+    },
+
+    greet(formal) {
+      var msg;
+
+      if (formal) {
+        msg = this.formalGreeting();
+      } else {
+        msg = this.greeting();
+      }
+
+      if (console) {
+        console.log(msg);
+      }
+
+      return this;
+    },
+
+    log() {
+      if (console) {
+        console.log(`${logMessages[this.language]} : ${this.fullName}`);
+      }
+    },
+
+    setLang(newLang) {
+      this.language = newLang;
+      this.validate();
+    }
+  };
 
   Greetr.init = function(firstName = 'Eric', lastName = 'Cartman', language = 'en') {
     this.firstName = firstName;
@@ -14,4 +79,4 @@
   Greetr.init.prototype = Greetr.prototype;
   global.Greetr = global.G$ = Greetr;
 
-})(window, jQuery);
+})(window, $);
