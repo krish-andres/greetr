@@ -1,4 +1,5 @@
 (function(global, $) {
+  // Instantiates the Greetr.init function constructor
   var Greetr = (firstName, lastName, language) => {
     return new Greetr.init(firstName, lastName, language);
   };
@@ -25,6 +26,7 @@
       return `${this.firstName} ${this.lastName}`;
     },
 
+    // Ensure that the language chosen is supported
     validate() {
       if (supportedLangs.indexOf(this.language) === -1) {
         this.language = "en";
@@ -43,13 +45,7 @@
     },
 
     greet(formal = false) {
-      var msg;
-
-      if (formal) {
-        msg = this.formalGreeting();
-      } else {
-        msg = this.greeting();
-      }
+      var msg = this.setGreeting(formal);
 
       if (console) {
         console.log(msg);
@@ -58,17 +54,32 @@
       return this;
     },
 
+    // Logs the language and fullName given
     log() {
       if (console) {
         console.log(`${logMessages[this.language]} : ${this.fullName()}`);
       }
     },
 
+    // Sets new language and ensures that it's valid
     setLang(newLang) {
       this.language = newLang;
       this.validate();
     },
 
+    setGreeting(formal = false) {
+      var msg;
+
+      if (formal) {
+        msg = this.formalGreeting();
+      } else {
+        msg = this.greeting();
+      }
+
+      return msg;
+    },
+
+    // Populates a selector with the formal or informal greeting
     HTMLGreeting(selector, formal = true) {
       if (!$) {
         throw "jQuery not loaded!"
@@ -76,13 +87,7 @@
         throw "missing jQuery selector"
       }
 
-      var msg;
-      if (formal) {
-        msg = this.formalGreeting();
-      } else {
-        msg = this.greeting();
-      }
-
+      var msg = this.setGreeting(formal);
       $(selector).html(msg);
       return this;
     },
@@ -92,6 +97,7 @@
     this.firstName = firstName;
     this.lastName = lastName;
     this.language = language;
+    this.validate();
   }
 
   Greetr.init.prototype = Greetr.prototype;
