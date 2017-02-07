@@ -57,6 +57,8 @@
       if (console) {
         console.log(`${logMessages[this.language]} : ${this.fullName()}`);
       }
+
+      return this;
     },
 
     // Sets new language and ensures that it's valid
