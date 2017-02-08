@@ -1,6 +1,8 @@
+// Test code to confirm Greetr is working
 var g = G$("Homer", "Simpson");
 g.greet().setLang('es').greet(true).log();
 
+// Greets user once they click the "Greet button"
 $("#greet").on("click", () => {
   var firstName = $("#firstname").val();
   var lastName = $("#lastname").val();
