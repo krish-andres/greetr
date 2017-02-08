@@ -11,4 +11,9 @@ $("#greet").on("click", () => {
   var loginGrtr = G$(firstName, lastName);
   $("#greetingdiv").hide();
   loginGrtr.setLang(language).HTMLGreeting("#greeting", true).log();
+
+  var reset = $("<input type='button' value='reset' id=reset />");
+  $("body").append(reset);
 });
+
+$("body").on("click", "#reset", () => { location.reload(); });
