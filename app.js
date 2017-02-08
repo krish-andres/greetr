@@ -2,7 +2,7 @@
 var g = G$("Homer", "Simpson");
 g.greet().setLang('es').greet(true).log();
 
-// Greets user once they click the "Greet button"
+// Greets user once they click the "Greet" button and adds "Reset" button
 $("#greet").on("click", () => {
   var firstName = $("#firstname").val();
   var lastName = $("#lastname").val();
@@ -16,4 +16,5 @@ $("#greet").on("click", () => {
   $("body").append(reset);
 });
 
+// Binds clicking "Reset" to reloading the page
 $("body").on("click", "#reset", () => { location.reload(); });
